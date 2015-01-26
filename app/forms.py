@@ -5,7 +5,7 @@ from app.models import User, Applicant, Recommender, Recommendation, Evaluation
 from django.forms.extras.widgets import SelectDateWidget
 from django_countries.fields import CountryField
 from django_countries import countries
-
+from localflavor.us.us_states import STATE_CHOICES
 
 # Adds the 'Select' placeholder to fields using countries
 places = ()
@@ -14,6 +14,11 @@ places +=select,
 for c in countries:
     places +=c,
 
+states = ()
+states +=select,
+for s in STATE_CHOICES:
+    states +=s,
+states += ('O','Other'),
 
 class CreateAccountForm(Form):
     first_name = CharField(required=True, max_length=30, label="First name(s)")
@@ -50,7 +55,7 @@ class ProfileForm(Form):
     first_name = CharField(required=True, max_length=30, label = "First name(s)")
     last_name = CharField(required=True, max_length=30, label = "Last name(s)")
     city = CharField(required=False, max_length=45)
-    state = CharField(required=False, max_length=45)
+    state = ChoiceField(required=False, choices=states)
     country = ChoiceField(required=False, choices=places)
     zipcode = CharField(required=False, max_length=5)
     dob = CharField(required=False, max_length=15)
