@@ -1,6 +1,6 @@
 from settings_hidden import *
 """
-Django settings for fellowship_application_full project.
+Django settings for betterhomepage project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -11,9 +11,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import psycopg2
-import urlparse
-from urlparse import urlparse
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -28,7 +25,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['apply.codeforprogress.org']
 
 
 # Application definition
@@ -43,6 +40,7 @@ INSTALLED_APPS = (
     'app',
     'widget_tweaks',
     'django_countries',
+    'localflavor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,11 +56,21 @@ ROOT_URLCONF = 'fellowship_application_full.urls'
 
 WSGI_APPLICATION = 'fellowship_application_full.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-import dj_database_url
-DATABASES = {'default': {'ENGINE':'django.db.backends.postgresql_psycopg2','NAME': 'fellowship_application','USER': hidden_db_user,'PASSWORD': hidden_db_password,'HOST': '127.0.0.1','PORT': '5432',}}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'fellowship_application',
+        'USER': hidden_db_user,
+        'PASSWORD': hidden_db_password,
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -81,21 +89,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = '' # This is where you want the collectstatic app to put all of the files for deployment, when it pulls from multiple DIRS
-STATIC_URL = '/static/' #This is the part that comes before what you are using in {% static %} tags to reference files
-STATIC_DIRS = 'app/static/' #These are where the files are actually stored
+STATIC_URL = '/static/'
 
-
-TEMPLATE_DIRS = (
-    'app/templates/app/',
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(__file__), '../app/static').replace('\\','/'),
 )
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+)
+
+
+    
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), '../app/templates/app').replace('\\','/'),
+    os.path.join(os.path.dirname(__file__), '../app/templates/registration').replace('\\','/'),
+
+)
 
 LOGIN_URL = 'django.contrib.auth.views.login'
 LOGIN_REDIRECT_URL = 'index'
 
-AUTH_USER_MODEL = 'auth.User'
-
+DEFAULT_FROM_EMAIL = 'aliya@codeforprogress.org'
+SERVER_EMAIL = 'aliya@codeforprogress.org'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
