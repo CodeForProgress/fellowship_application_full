@@ -18,6 +18,7 @@ from django.core.mail import send_mail
 
 # Section I: Views for all users
 # ==============================
+# Note that this app uses the built-in Django User module, but corrects for a mismatch in standard username and email field max length by limiting login field size for "username" to 30
 def login_view(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
