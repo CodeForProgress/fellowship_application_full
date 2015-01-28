@@ -7,7 +7,7 @@ def application_created(user_id):
     user = User.objects.get(id = user_id)
     subject = "Thanks for creating an application."
     signature = "\n\n\nThe Code for Progress team\n\n\nCode for Progress\nwww.codeforprogress.org\n(202) 817-2633\n\n1220 L Street NW, Suite 100-513\nWashington, DC 20005"
-    body_text = "Hi "+user.first_name+",\n\nThanks for creating an application for the 2015 Code for Progress fellowship! You can return to your application any time by visiting apply.codeforprogress.org.\n\nRemember that we'll need your completed application and three recommendations by March 15, 2015. \n\nIf you have questions about the program or the application before the deadline, we invite you to talk with our staff on an information call any Thursday at 8-8:30pm Eastern / 5-5:30pm Pacific. Just dial (202) 609-8606 and enter 333# when asked for the code.\n\nThanks for applying to Code for Progress!"+signature
+    body_text = "Hi "+user.first_name+",\n\nThanks for creating an application for the 2015 Code for Progress fellowship! You can return to your application any time by visiting apply.codeforprogress.org.\n\nRemember that we'll need your completed application and three recommendations by March 15, 2015. \n\nIf you have questions about the program or the application before the deadline, we invite you to talk with our staff on an information call any Thursday starting Feb 19th at 8-8:30pm Eastern / 5-5:30pm Pacific. Just dial (202) 609-8606 and enter 333# when asked for the code.\n\nThanks for applying to Code for Progress!"+signature
     send_mail(subject, body_text, 'Aliya Rahman, Code for Progress', [user.email], fail_silently=False)
 
 
