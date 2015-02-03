@@ -43,23 +43,29 @@
 
 
 
-            <div class="form-group"><!-- S XXX-->
-              <br><br><br><br><br>
-              <div class="col-xs-2 pull-right">
-              <button id="next" type="submit" class="btn btn-lg btn-form pull-right {% if not user.applicant.application_complete %}disabled{% else %}btn-info{% endif %}" {% if user.applicant.application_complete %} onClick='location.href="{% url 'finalsubmission' %}"'{% endif %}>Submit your final application &gt; &gt;</button>
-              </div><br><br><br>
-            </div><!-- E -->
+        <div class="col-xs-12 container"><!-- S XXX-->
+          <br><br><br><br><br>
+          <div class="row">
+              <div class="col-md-offset-6">
+                <div class="btn btn-success btn-lg col-xs-12 col-md-4" style="margin: 0 5px 10px 0" onClick="location.href='{% url 'logout_view' %}'" >Save and exit</div>
+
+                <button class="btn btn-lg col-xs-12 col-md-7 {% if not user.applicant.application_complete %}disabled{% else %}btn-info{% endif %}" type="submit"  {% if user.applicant.application_complete %} onClick='location.href="{% url 'finalsubmission' %}"'{% endif %}>Submit full application &gt; &gt;</button>
+              </div>
+
+          </div>
+          <br><br><br>
+        </div><!-- E -->
 
     {% else %}
 
-    <div class="row">
-      <div class="col-xs-11 col-offset-xs-1"><p>Thanks for submitting your application for the 2015 Code for Progress fellowship!</p>
+        <div class="row">
+          <div class="col-xs-11 col-offset-xs-1"><p>Thanks for submitting your application for the 2015 Code for Progress fellowship!</p>
 
-      <p>If you need to replace a recommender, update an existing recommender's email address, or send them a reminder and password, you can do that using the controls below. Remember that the application deadline is <b>March 31, 2015</b>, so we'll need your recommenders to complete their recommendations by then.</p>
+          <p>If you need to replace a recommender, update an existing recommender's email address, or send them a reminder and password, you can do that using the controls below. Remember that the application deadline is <b>March 31, 2015</b>, so we'll need your recommenders to complete their recommendations by then.</p>
 
-      <p>When a recommender has completed their recommendation for you, you'll see <span class="text-success">"Recommendation received &#x2713"</span> in green next to their name in the list below.</p>
-      </div>
-    </div>
+          <p>When a recommender has completed their recommendation for you, you'll see <span class="text-success">"Recommendation received &#x2713"</span> in green next to their name in the list below.</p>
+          </div>
+        </div>
 
 
         <br><br>
