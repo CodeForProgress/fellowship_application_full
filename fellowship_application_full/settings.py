@@ -91,8 +91,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/var/www/html/fellowship_application_full/app/static/'
+
 STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(__file__), '../app/static').replace('\\','/'),
+    '/usr/lib/python2.6/site-packages/django/contrib/admin/static/',
 )
 
 STATICFILES_FINDERS = (
