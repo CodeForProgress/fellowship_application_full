@@ -1,0 +1,71 @@
+{% extends "login_base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<div class="container">
+    <br>
+    <h1 class="text-center">Welcome to the Code for Progress 2015 Fellowship application portal</h1>
+    <hr>
+    <br><br>
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <h3 class="text-center">Ready to apply?</h3>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <button class="btn btn-lg btn-login btn-block" onClick='location.href="{% url 'createaccount' %}"'>Get started &gt &gt</button><br><br><br>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-sm-5 col-sm-offset-1">
+            <div class="row">
+              <div class="col-sm-12">
+                <h3 class="text-center">Already have an account? Log in below.</h3>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+                <form class="form-horizontal text-center" role="form" method="post" action=".">
+                    {% csrf_token %}
+                    <div class="form-group">
+                       <div class="col-sm-8 col-sm-offset-2">
+                         {% render_field form.username class+="form-control text-center" placeholder="Username" %}
+                       </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-8 col-sm-offset-2">
+                         {% render_field form.password class+="form-control text-center" placeholder="Password" %}
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                          {% if form.errors %}
+                            <p class="text-danger">Hmm, that's not the right username / password.<br /></p>
+                            {% endif %}
+                          <button type="submit" class="btn btn-lg btn-login btn-block">Sign in</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-8 col-sm-offset-2">
+                        <a href="{% url 'forgot_password' %}" class="forgot">Forgot your password?</a><br><br><br><br>
+                      </div>
+                    </div>
+
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -11,7 +11,7 @@ from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from app.models import Applicant, Evaluator, Recommender, Staff, Recommendation, Evaluation
-from app.forms import ForgotPasswordForm, ResetPasswordForm, CreateAccountForm, ProfileForm, TechForm, ShortAnswersForm, RecommendersForm, EditRecommenderForm, RecommendationForm, EvaluationForm, AssignEvaluatorForm
+from app.forms import CustomLoginForm, ForgotPasswordForm, ResetPasswordForm, CreateAccountForm, ProfileForm, TechForm, ShortAnswersForm, RecommendersForm, EditRecommenderForm, RecommendationForm, EvaluationForm, AssignEvaluatorForm
 from app.emails import application_created, password_sent, application_received, recommendation_requested, recommendation_requested_existing_recommender, recommendation_request_sent, recommendation_received
 from django.core.mail import send_mail
 
@@ -19,14 +19,17 @@ from django.core.mail import send_mail
 # Section I: Views for all users
 # ==============================
 # Note that this app uses the built-in Django User module, but corrects for a mismatch in standard username and email field max length by limiting login field size for "username" to 30
+
 def login_view(request):
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-    else:
-        form = AuthenticationForm()
-        return render(request, 'login.html', {'form': form})
+    form = CustomLoginForm(request.POST or None)
+    if request.POST and form.is_valid():
+        user = form.login(request)
+        if user:
+            login(request, user)
+            return HttpResponseRedirect(reverse('index'))
+    return render(request, 'login.html', {'form': form })
+
+
 
 
 def logout_view(request):

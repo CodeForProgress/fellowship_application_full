@@ -3,7 +3,7 @@ from app import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
-    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^login/$', views.login_view, name='login_view'),
     url(r'^logout/$', views.logout_view, name='logout_view'),
     url(r'^forgot_password/$', views.forgot_password, name='forgot_password'),
     url(r'^reset_password/$', views.reset_password, name='reset_password'),

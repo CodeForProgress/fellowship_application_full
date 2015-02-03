@@ -6,6 +6,8 @@ from django.forms.extras.widgets import SelectDateWidget
 from django_countries.fields import CountryField
 from django_countries import countries
 from localflavor.us.us_states import STATE_CHOICES
+from django.contrib.auth import authenticate, login, logout
+
 
 # Adds the 'Select' placeholder to fields using countries
 places = ()
@@ -19,6 +21,27 @@ states +=select,
 for s in STATE_CHOICES:
     states +=s,
 states += ('O','Other'),
+
+
+class CustomLoginForm(Form):
+    username = CharField(required=True, max_length=75, label="Username or email")
+    password = CharField(widget=PasswordInput(), required=True, max_length=45, label = "Password")
+
+    def clean(self):
+        username = self.cleaned_data.get('username')[0:30]
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if not user or not user.is_active:
+            raise forms.ValidationError("Hmm, that wasn't the right username or password.")
+        return self.cleaned_data
+
+    def login(self, request):
+        username = self.cleaned_data.get('username')[0:30]
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        return user
+
+
 
 class CreateAccountForm(Form):
     first_name = CharField(required=True, max_length=30, label="First name(s)")

@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = hidden_secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -102,14 +102,13 @@ STATICFILES_FINDERS = (
 )
 
 
-    
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), '../app/templates/app').replace('\\','/'),
     os.path.join(os.path.dirname(__file__), '../app/templates/registration').replace('\\','/'),
 
 )
 
-LOGIN_URL = 'django.contrib.auth.views.login'
+LOGIN_URL = 'login_view'
 LOGIN_REDIRECT_URL = 'index'
 
 DEFAULT_FROM_EMAIL = 'aliya@codeforprogress.org'
