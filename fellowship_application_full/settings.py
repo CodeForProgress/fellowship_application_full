@@ -22,6 +22,7 @@ SECRET_KEY = hidden_secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+ADMINS = (('dirk', 'dirk@codeforprogress.org'))
 
 TEMPLATE_DEBUG = True
 
@@ -111,10 +112,10 @@ TEMPLATE_DIRS = (
 LOGIN_URL = 'login_view'
 LOGIN_REDIRECT_URL = 'index'
 
-DEFAULT_FROM_EMAIL = 'aliya@codeforprogress.org'
-SERVER_EMAIL = 'aliya@codeforprogress.org'
+DEFAULT_FROM_EMAIL = 'programs@codeforprogress.org'
+SERVER_EMAIL = 'programs@codeforprogress.org'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'aliya@codeforprogress.org'
+EMAIL_HOST_USER = 'programs@codeforprogress.org'
 EMAIL_HOST_PASSWORD = hidden_email_password
