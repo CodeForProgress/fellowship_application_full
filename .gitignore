@@ -19,3 +19,5 @@ build/*
 
 ## Settings Configurations ##
 fellowship_application_full/settings_hidden.py
+
+.idea
