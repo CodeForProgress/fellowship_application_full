@@ -23,7 +23,7 @@ def application_received(user_id):
     user = User.objects.get(id = user_id)
     subject = "We've received your application for the 2015 Code for Progress fellowship"
     signature = "\n\n\nThe Code for Progress team\n\n\nCode for Progress\nwww.codeforprogress.org\n(202) 817-2633\n\n1220 L Street NW, Suite 100-513\nWashington, DC 20005"
-    body_text = "Hi "+user.first_name+",\n\nThanks for applying to the 2015 Code for Progress fellowship! We've received your complete application, and we've sent emails to your recommenders with login information and instructions for completing their recommendations.\n\nRemember that we must receive all three of your recommendations by March 31, so please check to make sure your recommenders will be able to meet the deadline. You can also always log back in to the application site to see your recommenders' progress on your dashboard.\n\nPlease look for an email from us during the last week of March, after our selection committee has chosen our second-round applicants.\n\nSincerely,"+signature
+    body_text = "Hi "+user.first_name+",\n\nThanks for applying to the 2015 Code for Progress fellowship! We've received your complete application, and we've sent emails to your recommenders with login information and instructions for completing their recommendations.\n\nRemember that we must receive all three of your recommendations by March 31, so please check to make sure your recommenders will be able to meet the deadline. You can also always log back in to the application site to see your recommenders' progress on your dashboard.\n\nSincerely,"+signature
     send_mail(subject, body_text, 'Code for Progress Staff', [user.email], fail_silently=False)
 
 
