@@ -370,7 +370,7 @@ def replace_recommender(request, recommender_id):
             add_recommender(email, first_name, last_name, user.applicant)
             new_rec_user = User.objects.filter(email = email).first()
             new_recommender = Recommender.objects.filter(user = new_rec_user).first()
-            recommendation_request_sent(user.id, new_recommender.id,)
+            recommendation_request_sent(user.id, new_recommender.id)
             return HttpResponseRedirect(reverse('applicant_index'))
     else:
         form = EditRecommenderForm(request=request)
