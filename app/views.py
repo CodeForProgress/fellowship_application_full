@@ -340,12 +340,14 @@ def add_recommender(email, first_name, last_name, applicant):
         password = generate_password()
         rec_user.set_password(password)
         rec_user.save()
-    recommender = Recommender.objects.filter(user_id = rec_user.id).first()
-    if not recommender:
         recommender = Recommender(user = rec_user, role=2)
         recommender.save()
         recommendation_requested(applicant.user.id, recommender.id, password)
     else:
+        recommender = Recommender.objects.filter(user_id = rec_user.id).first()
+        if not recommender:
+            recommender = Recommender(user = rec_user, role=2)
+            recommender.save()
         recommendation_requested_existing_recommender(applicant.user.id, recommender.id)
     recommendation = Recommendation(applicant = applicant, recommender = recommender)
     recommendation.save()
