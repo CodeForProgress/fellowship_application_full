@@ -330,8 +330,8 @@ def finalsubmission(request):
 
 def add_recommender(email, first_name, last_name, applicant):
     applicant = Applicant.objects.get(id = applicant.id)
-    recommender = User.objects.filter(email = email).first()
-    if not recommender:
+    rec_user = User.objects.filter(email = email).first()
+    if not rec_user:
         if len(email)>30:
             username = email[0:30]
         else:
@@ -340,6 +340,8 @@ def add_recommender(email, first_name, last_name, applicant):
         password = generate_password()
         rec_user.set_password(password)
         rec_user.save()
+    recommender = Recommender.objects.filter(user_id = rec_user.id).first()
+    if not recommender:
         recommender = Recommender(user = rec_user, role=2)
         recommender.save()
         recommendation_requested(applicant.user.id, recommender.id, password)
