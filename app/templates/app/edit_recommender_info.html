@@ -7,7 +7,7 @@
 <form class="form-horizontal" name="form" action="" method="post">
 {% csrf_token %}
 
-<h1 class="nopadding">Edit {{recommender.user.first_name}} {{recommender.user.last_name}}'s info</h1>
+<h1 class="nopadding">Review {{recommender.user.first_name}} {{recommender.user.last_name}}'s info</h1>
 <hr class="form">
 
   <p>Please enter any updated/corrected info here. If you want to send a new login email, you can do that from your dashboard screen after you save these changes.</b></p>
@@ -45,16 +45,6 @@
 
 
     <br><br>
-
-        <div class="form-group"><!-- S XXX-->
-            <br><br>
-          <div class="col-md-8 col-md-offset-4">
-            <div onClick='location.href="{% url 'applicant_index' %}"' class="btn btn-lg btn-default">
-          Cancel
-        </div>
-            <button id="next" type="submit" class="btn btn-lg btn-form btn-success">Save changes &gt; &gt;</button>
-          </div><br><br><br><br><br>
-        </div><!-- E -->
   
    
     

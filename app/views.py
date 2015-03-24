@@ -403,6 +403,10 @@ def edit_recommender_info(request, recommender_id):
         recommender_info = model_to_dict(recommender)
         allinfo = dict(recommender_user_info.items() + recommender_info.items())
         form = EditRecommenderForm(request=request, initial=allinfo)
+        form.fields['first_name'].widget.attrs['readonly'] = True
+        form.fields['last_name'].widget.attrs['readonly'] = True
+        form.fields['email'].widget.attrs['readonly'] = True
+        form.fields['relationship'].widget.attrs['readonly'] = True
     return render(request, "edit_recommender_info.html", {'form': form, 'recommender': recommender})
 
 @login_required

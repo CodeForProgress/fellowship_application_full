@@ -80,7 +80,7 @@
                       <div class="col-md-6"><b>{{ recommendation.recommender.user.first_name }} {{ recommendation.recommender.user.last_name }}</b></div>
 
                       {% if not recommendation.submitted %}
-                      <span class="col-md-2"><button onClick='location.href="{% url 'edit_recommender_info' recommendation.recommender.id %}"' class="btn btn-success btn-block">Edit info</button></span>
+                      <span class="col-md-2"><button onClick='location.href="{% url 'edit_recommender_info' recommendation.recommender.id %}"' class="btn btn-success btn-block">Review info</button></span>
                       <span class="col-md-2"><button onClick='location.href="{% url 'send_recommender_reminder' recommendation.recommender.id %}"' class="btn btn-info btn-block">Send email</button></span>
                       <span class="col-md-2"><button onClick='location.href="{% url 'replace_recommender' recommendation.recommender.id %}"' class="btn btn-primary btn-block">Replace</button></span>
                       {% else %}<span class="text-success">Recommendation received &#x2713;</span>{% endif %}
