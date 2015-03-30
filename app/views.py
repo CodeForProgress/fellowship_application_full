@@ -556,7 +556,7 @@ def eval_click(request):
                 for rec in recommendations:
                     rec_ids.append(rec.id)
                 rec_ids.sort()
-                recnum = data['recnum'][-1]
+                recnum = int(data['recnum'][-1])
                 recommendation = Recommendation.objects.get(id = rec_ids[recnum]) if not len(rec_ids) - 1 < recnum else None
                 payload = {'recommendation': recommendation}
             elif data['linktype'] == 'app':
