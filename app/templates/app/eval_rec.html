@@ -1,0 +1,121 @@
+{% if recommendation %}
+<h1>Recommendation for {{recommendation.applicant.user.first_name}} {{recommendation.applicant.user.last_name}}</h1>
+<hr class="recommendation">
+
+        <br><br>
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div class="col-sm-10">1. How long have you known {{recommendation.applicant.user.first_name}}? In what capacity have you known them?</div><br><br>
+            <div class="col-xs-10">
+            {{ recommendation.known_applicant }}
+            </div>
+          </div>
+        </div><!-- E -->
+
+        <br><hr><br>
+
+        <p>On a scale of 1-5 (where 1 means "This applicant doesn't demonstrate this quality at all" and 5 means "This applicant strongly exemplifies this quality"), please rate the applicant on their:</p><br>
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>2. Commitment to racial, gender, and/or economic justice</div><br>
+            <div class="col-sm-4">{{ recommendation.commitment_to_justice_rating }}</div>
+            <br><br><br>
+            <div class="col-sm-10 left">Please give us an example that explains your rating.</div><br><br>
+            <div class="col-xs-10">
+            {{ recommendation.commitment_to_justice }}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>3. Creativity in problem solving</div><br>
+            <div class="col-sm-4">{{ recommendation.problem_solving_rating }}</div>
+            <br><br><br>
+            <div class="col-sm-10 left">Please give us an example that explains your rating.</div><br><br>
+            <div class="col-xs-10">
+            {{ recommendation.problem_solving }}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>4. Patience in working through obstacles</div><br>
+            <div class="col-sm-4">{{ recommendation.obstacles_rating }}</div>
+            <br><br><br>
+            <div class="col-sm-10 left">Please give us an example that explains your rating.</div><br><br>
+            <div class="col-xs-10">
+            {{ recommendation.obstacles }}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>5. Demonstrated interest in teaching and mentoring others</div><br>
+            <div class="col-sm-4">{{ recommendation.teaching_rating }}</div>
+            <br><br><br>
+            <div class="col-sm-10 left">Please give us an example that explains your rating.</div><br><br>
+            <div class="col-xs-10">
+            {{ recommendation.teaching }}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>6. Curiosity around how things work (likes to take things apart, dig into the structure of groups or organizations, find out what "makes people tick")</div><br>
+            <div class="col-sm-4">{{ recommendation.curiosity_rating }}</div>
+            <br><br><br>
+            <div class="col-sm-10 left">Please give us an example that explains your rating.</div><br><br>
+            <div class="col-xs-10">
+            {{ recommendation.curiosity }}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>7. Demonstrated willingness to ask for help</div><br>
+            <div class="col-sm-4">{{ recommendation.help_rating }}</div>
+            <br><br><br>
+            <div class="col-sm-10 left">Please give us an example that explains your rating.</div><br><br>
+            <div class="col-xs-10">
+            {{ recommendation.help }}
+            </div>
+          </div>
+        </div><!-- E -->
+
+        <br><hr><br>
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>8. We are committed to our students as professionals - but we also want to support them as members of our community. If they are accepted to the program, what is one specific challenge faced by this applicant that we should keep in mind?</div><br>
+            <div class="col-sm-10">{{ recommendation.accommodations }}</div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+
+        <div class="recommendation-group"><!-- S -->
+          <div class="col-sm-10 col-sm-offset-1">
+            <div>9. What specific things can we do to best support this applicant, if they are accepted to the program?</div><br>
+            <div class="col-sm-10">{{ recommendation.support }}</div>
+            <br><br><br>
+          </div>
+        </div><!-- E -->
+        <br><br>
+{% else %}
+    <p>There is no recommendation here for this applicant.</p>
+{% endif %}

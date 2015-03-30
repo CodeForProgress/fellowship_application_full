@@ -1,0 +1,104 @@
+<div><!-- Form Start-->
+    <form class="form-horizontal" name="form" action="" method="post">
+    {% csrf_token %}
+
+    <div style="float:left; width:50%">
+        <p>On a scale of 1-5 (where 1 means "This applicant doesn't demonstrate this quality at all" and 5 means "This applicant strongly exemplifies this quality"), please rate the applicant on their:</p><br>
+        <div class="form-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div>{{ form.criteria_1_rating.label }}</div><br>
+            <div class="col-sm-8">
+                {% for choice in form.criteria_1_rating %}
+                    {{ choice.choice_label }} {{ choice.tag }}&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endfor %}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br>
+
+        <div class="form-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div>{{ form.criteria_2_rating.label }}</div><br>
+            <div class="col-sm-8">
+                {% for choice in form.criteria_2_rating %}
+                    {{ choice.choice_label }} {{ choice.tag }}&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endfor %}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br>
+
+        <div class="form-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div>{{ form.criteria_3_rating.label }}</div><br>
+            <div class="col-sm-8">
+                {% for choice in form.criteria_3_rating %}
+                    {{ choice.choice_label }} {{ choice.tag }}&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endfor %}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br>
+
+        <div class="form-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div>{{ form.criteria_4_rating.label }}</div><br>
+            <div class="col-sm-8">
+                {% for choice in form.criteria_4_rating %}
+                    {{ choice.choice_label }} {{ choice.tag }}&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endfor %}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br>
+
+        <div class="form-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div>{{ form.criteria_5_rating.label }}</div><br>
+            <div class="col-sm-8">
+                {% for choice in form.criteria_5_rating %}
+                    {{ choice.choice_label }} {{ choice.tag }}&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endfor %}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+    </div>
+
+    <div style="float:left;width:50%;">
+        <div class="form-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div>{{ form.notes.label }}</div><br>
+            <div class="col-sm-4">
+                {{ form.notes }}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+
+        <div class="form-group"><!-- S -->
+          <div class="col-sm-offset-1">
+            <div>{{ form.recommend.label }}</div><br>
+            <div class="col-sm-4">
+                {{ form.recommend }}
+            </div>
+          </div>
+        </div><!-- E -->
+        <br><br>
+    </div>
+
+    <div class="form-group"><!-- S XXX-->
+        <br><br>
+      <div class="col-md-6 col-md-offset-6">
+        <div onClick='location.href="{% url 'index' %}"' class="btn btn-lg btn-default">
+          Cancel
+        </div>
+        <button id="next" type="submit" class="btn btn-lg btn-form btn-success">
+          Save these answers &gt; &gt;
+        </button>
+      </div>
+    </div>
+<BR><BR>
+    
+</form><!-- Form End-->
+</div><!-- Form End-->

@@ -522,21 +522,49 @@ def evaluate(request, evaluation_id):#pass in the student this is for
     applicant = evaluation.applicant
     recommendations = applicant.recommendation_set.all() 
     if request.method == 'POST':
-        form = EvaluatorForm(request.POST)
+        form = EvaluationForm(request.POST)
         if form.is_valid():
-            evaluation.criteria_1_rating = form.cleaned_data.get('criteria1rating')
-            evaluation.criteria_2_rating = form.cleaned_data.get('criteria2rating')
-            evaluation.criteria_3_rating = form.cleaned_data.get('criteria3rating')
-            evaluation.criteria_4_rating = form.cleaned_data.get('criteria4rating')
-            evaluation.criteria_5_rating = form.cleaned_data.get('criteria5rating')
+            evaluation.criteria_1_rating = form.cleaned_data.get('criteria_1_rating')
+            evaluation.criteria_2_rating = form.cleaned_data.get('criteria_2_rating')
+            evaluation.criteria_3_rating = form.cleaned_data.get('criteria_3_rating')
+            evaluation.criteria_4_rating = form.cleaned_data.get('criteria_4_rating')
+            evaluation.criteria_5_rating = form.cleaned_data.get('criteria_5_rating')
             evaluation.notes = form.cleaned_data.get('notes')
             evaluation.recommend = form.cleaned_data.get('recommend')
             evaluation.save()
             return HttpResponseRedirect(reverse('eval_index'))
     else:
         evaluationinfo = model_to_dict(evaluation)
-        form = EvaluatorForm(initial=evaluationinfo)
-    return render(request, 'evaluate.html', {'applicant': applicant, 'form':form, 'recommendations': recommendations})
+        form = EvaluationForm(initial=evaluationinfo)
+    return render(request, 'evaluate_base.html', {'evaluation': evaluation, 'form':form, 'recommendations': recommendations})
+
+def eval_click(request):
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            data = request.POST
+            evaluation = Evaluation.objects.get(id = data['evaluation_id'])
+
+            if data['linktype'] == 'eval':
+                url = 'evaluate.html'
+                evaluationinfo = model_to_dict(evaluation)
+                form = EvaluationForm(initial=evaluationinfo)
+                payload = {'evaluation': evaluation, 'form': form }
+            elif data['linktype'] == 'rec':
+                url = 'eval_rec.html'
+                recommendations = evaluation.applicant.recommendation_set.all()
+                rec_ids = []
+                for rec in recommendations:
+                    rec_ids.append(rec.id)
+                rec_ids.sort()
+                recnum = data['recnum'][-1]
+                recommendation = Recommendation.objects.get(id = rec_ids[recnum]) if not len(rec_ids) - 1 < recnum else None
+                payload = {'recommendation': recommendation}
+            elif data['linktype'] == 'app':
+                url = 'eval_app.html'
+                payload = {'applicant': evaluation.applicant}
+            return render(request, url, payload)
+    else:
+        return HttpResponseRedirect('index')
 
 
 

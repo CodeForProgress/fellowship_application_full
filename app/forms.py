@@ -217,13 +217,13 @@ class RecommendationForm(Form):
 
 
 class EvaluationForm(Form):
-    criteria_1_rating = ChoiceField(widget=RadioSelect, choices=(('0','Select...'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_2_rating = ChoiceField(widget=RadioSelect, choices=(('0','Select...'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_3_rating = ChoiceField(widget=RadioSelect, choices=(('0','Select...'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_4_rating = ChoiceField(widget=RadioSelect, choices=(('0','Select...'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_5_rating = ChoiceField(widget=RadioSelect, choices=(('0','Select...'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
+    criteria_1_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
+    criteria_2_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
+    criteria_3_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
+    criteria_4_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
+    criteria_5_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
     notes = CharField(required=False, widget=Textarea())
-    recommend = ChoiceField(choices=(('0','Select...'),('1', 'No'),('2', 'Yes')), required=True, label="Overal recommendation")
+    recommend = ChoiceField(choices=(('0','Select...'),('1', 'No'),('2', 'Yes')), required=True, label="Overall recommendation")
 
 
 class EditRecommenderForm(Form):

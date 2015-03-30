@@ -5,8 +5,21 @@
 
 <h1>Your evaluator dashboard</h1>
 <hr class="form">
-
-
-
+<p>Text thanking the evaluator for their time, and brief instructions on how to complete the evaluations.  Woo!</p>
+{% for evaluation in evaluations %}
+<div class="row">
+              <div class="col-sm-4 col-sm-offset-1">
+                <hr>
+                <h3>{{evaluation.applicant.user.first_name}} {{evaluation.applicant.user.last_name}}</h3>
+              </div>
+              <div class="col-sm-3">
+                <hr>
+                <button onClick="location.href='{% url 'evaluate' evaluation.id %}'" class="btn-block btn btn-lg btn-info">
+                    Start/Edit
+                    {% if evaluation.is_complete %} &nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">Done</span> {% endif %}
+                </button>
+              </div>
+          </div><br>
+{% endfor %}
 
 {% endblock %}
