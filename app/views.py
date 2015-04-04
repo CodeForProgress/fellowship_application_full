@@ -155,7 +155,7 @@ def applicant_index(request):
         applicant = user.applicant
     except:
         return HttpResponseRedirect(reverse('index'))
-    return render(request, 'applicant_index.html', {'user': user})
+    return render(request, 'app_closed.html', {'user': user})
 
 
 @login_required
@@ -447,7 +447,7 @@ def rec_index(request):
         return HttpResponseRedirect(reverse('index'))
     recommender = user.recommender
     recommendations = recommender.recommendation_set.all()
-    return render(request, 'rec_index.html', {'recommender':recommender,'recommendations':recommendations})
+    return render(request, 'app_closed.html', {'recommender':recommender,'recommendations':recommendations})
 
 
 @login_required
