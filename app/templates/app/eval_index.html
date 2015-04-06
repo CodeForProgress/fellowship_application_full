@@ -5,21 +5,27 @@
 
 <h1>Your evaluator dashboard</h1>
 <hr class="form">
-<p>Text thanking the evaluator for their time, and brief instructions on how to complete the evaluations.  Woo!</p>
+<div>
+<div style="float:left;">Text thanking the evaluator for their time, and brief instructions on how to complete the evaluations.  Woo!</div>
+{% if user.evaluator.all_evals_complete %}
+        <div style="float:left; margin-left: 50px;"><a href="{% url 'add_evaluation' %}" class="btn btn-success">Add New Evaluation</a></div>
+{% endif %}
+</p></div>
+<BR>
 {% for evaluation in evaluations %}
 <div class="row">
-              <div class="col-sm-4 col-sm-offset-1">
-                <hr>
-                <h3>{{evaluation.applicant.user.first_name}} {{evaluation.applicant.user.last_name}}</h3>
-              </div>
-              <div class="col-sm-3">
-                <hr>
-                <button onClick="location.href='{% url 'evaluate' evaluation.id %}'" class="btn-block btn btn-lg btn-info">
-                    Start/Edit
-                    {% if evaluation.is_complete %} &nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">Done</span> {% endif %}
-                </button>
-              </div>
-          </div><br>
+  <div class="col-sm-4 col-sm-offset-1">
+    <hr>
+    <h3>{{evaluation.applicant.user.first_name}} {{evaluation.applicant.user.last_name}}</h3>
+  </div>
+  <div class="col-sm-3">
+    <hr>
+    <button onClick="location.href='{% url 'evaluate' evaluation.id %}'" class="btn-block btn btn-lg btn-info">
+        Start/Edit
+        {% if evaluation.is_complete %} &nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">Done</span> {% endif %}
+    </button>
+  </div>
+</div><br>
 {% endfor %}
 
 {% endblock %}

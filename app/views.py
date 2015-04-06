@@ -509,7 +509,7 @@ def eval_index(request):
     user = User.objects.get(id = request.user.id)
     evaluator = user.evaluator
     evaluations = evaluator.evaluation_set.all()
-    return render(request, 'eval_index.html', {'evaluations': evaluations})
+    return render(request, 'eval_index.html', {'user': user, 'evaluations': evaluations})
 
 
 @login_required
@@ -524,11 +524,11 @@ def evaluate(request, evaluation_id):#pass in the student this is for
     if request.method == 'POST':
         form = EvaluationForm(request.POST)
         if form.is_valid():
-            evaluation.criteria_1_rating = form.cleaned_data.get('criteria_1_rating')
-            evaluation.criteria_2_rating = form.cleaned_data.get('criteria_2_rating')
-            evaluation.criteria_3_rating = form.cleaned_data.get('criteria_3_rating')
-            evaluation.criteria_4_rating = form.cleaned_data.get('criteria_4_rating')
-            evaluation.criteria_5_rating = form.cleaned_data.get('criteria_5_rating')
+            evaluation.criteria_1_rating = form.cleaned_data.get('criteria_1_rating') if form.cleaned_data.get('criteria_1_rating') else None
+            evaluation.criteria_2_rating = form.cleaned_data.get('criteria_2_rating') if form.cleaned_data.get('criteria_2_rating') else None
+            evaluation.criteria_3_rating = form.cleaned_data.get('criteria_3_rating') if form.cleaned_data.get('criteria_3_rating') else None
+            evaluation.criteria_4_rating = form.cleaned_data.get('criteria_4_rating') if form.cleaned_data.get('criteria_4_rating') else None
+            evaluation.criteria_5_rating = form.cleaned_data.get('criteria_5_rating') if form.cleaned_data.get('criteria_5_rating') else None
             evaluation.notes = form.cleaned_data.get('notes')
             evaluation.recommend = form.cleaned_data.get('recommend')
             evaluation.save()
@@ -566,6 +566,17 @@ def eval_click(request):
     else:
         return HttpResponseRedirect('index')
 
+@login_required
+def add_evaluation(request):
+    try:
+        request.user.evaluator
+    except:
+        return HttpResponseRedirect(reverse('index'))
+
+    user = User.objects.get(id = request.user.id)
+    evaluator = user.evaluator
+    evaluator.add_new_evaluation()
+    return HttpResponseRedirect(reverse('index'))
 
 
 

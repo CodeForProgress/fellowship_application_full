@@ -236,6 +236,28 @@ class Evaluator(models.Model):
                 return False
         return True
 
+    def add_new_evaluation(self):
+        applicant = Applicant.objects.raw("""
+                SELECT *
+                FROM app_applicant
+                WHERE id NOT IN (
+                    SELECT applicant_id
+                    FROM app_evaluation
+                    WHERE criteria_1_rating IS NOT NULL
+                    AND criteria_2_rating IS NOT NULL
+                    AND criteria_3_rating IS NOT NULL
+                    AND criteria_4_rating IS NOT NULL
+                    AND criteria_5_rating IS NOT NULL
+                    AND recommend IS NOT NULL
+                    GROUP BY applicant_id
+                    HAVING count(*) >= 3
+                )
+                ORDER BY random();
+        """)[0]
+
+        evaluation = Evaluation(applicant = applicant, evaluator = self)
+        evaluation.save()
+
 
 
 class Evaluation(models.Model):
