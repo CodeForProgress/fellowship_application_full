@@ -6,9 +6,9 @@
 <h1>Your evaluator dashboard</h1>
 <hr class="form">
 <div>
-<div style="float:left;">Text thanking the evaluator for their time, and brief instructions on how to complete the evaluations.  Woo!</div>
+<div style="float:left; width:75%">Text thanking the evaluator for their time, and brief instructions on how to complete the evaluations.  Woo!</div>
 {% if user.evaluator.all_evals_complete %}
-        <div style="float:left; margin-left: 50px;"><a href="{% url 'add_evaluation' %}" class="btn btn-success">Add New Evaluation</a></div>
+        <div style="float:left; margin-left: 10%; width: 15%;"><a href="{% url 'add_evaluation' %}" class="btn btn-success">Add New Evaluation</a></div>
 {% endif %}
 </p></div>
 <BR><BR><BR>
