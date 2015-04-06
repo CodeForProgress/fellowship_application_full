@@ -12,6 +12,7 @@
 {% endif %}
 </p></div>
 <BR>
+<div>
 {% for evaluation in evaluations %}
 <div class="row">
   <div class="col-sm-4 col-sm-offset-1">
@@ -25,6 +26,7 @@
         {% if evaluation.is_complete %} &nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">Done</span> {% endif %}
     </button>
   </div>
+</div>
 </div><br>
 {% endfor %}
 
