@@ -1,0 +1,30 @@
+<div><!-- Form Start-->
+    <form class="form-horizontal" name="form" action="" method="post">
+    {% csrf_token %}
+
+    <div class="form-group"><!-- S -->
+      <div class="col-sm-offset-1">
+        <div>{{ form.approve.label }}</div><br>
+        <div class="col-sm-4">
+            {{ form.approve }}
+        </div>
+      </div>
+    </div><!-- E -->
+    <br><br>
+
+
+    <div class="form-group"><!-- S XXX-->
+        <br><br>
+      <div class="col-md-6 col-md-offset-6">
+        <div onClick="location.href='{% url 'index' %}'" class="btn btn-lg btn-default">
+          Cancel
+        </div>
+        <button id="next" type="submit" class="btn btn-lg btn-form btn-success">
+          Cast ye Vote &gt; &gt;
+        </button>
+      </div>
+    </div>
+<BR><BR>
+
+</form><!-- Form End-->
+</div><!-- Form End-->

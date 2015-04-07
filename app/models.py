@@ -84,6 +84,7 @@ class Applicant(models.Model):
     rec3relationship = models.CharField(max_length=140, null=True, blank=True)
 
     application_submitted = models.IntegerField(default = 0)
+    is_approved = models.IntegerField(default = 0)
 
     created_at = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now())
     updated_at = models.DateTimeField(auto_now=True, default=datetime.datetime.now())
@@ -136,6 +137,10 @@ class Applicant(models.Model):
                 total_score+=(e.criteria_1_rating+e.criteria_2_rating+e.criteria_3_rating+e.criteria_4_rating+e.criteria_5_rating)
         average_long = float(total_score)/float(num_evals)
         return round(average_long,3)
+
+    def all_submitted(self):
+        applicants = Applicant.objects.raw("SELECT * FROM app_applicants WHERE application_submitted = 1")
+        return applicants
 
 
 class Recommender(models.Model):
@@ -252,6 +257,7 @@ class Evaluator(models.Model):
                     GROUP BY applicant_id
                     HAVING count(*) >= 3
                 )
+                AND is_approved = 1
                 ORDER BY random();
         """)[0]
 

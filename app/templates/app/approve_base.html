@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<h1>Evaluation for {{applicant.user.first_name}} {{applicant.user.last_name}}</h1>
+<hr class="form">
+    <p>Use the buttons below to view the application and each associated recommendation, and then click "Evaluate" to fill in your evaluation for the applicant.</p>
+    <button id='viewApp' onClick='' class="btn btn-lg btn-primary evalView">View Application</button>
+    <button id='viewRec0' onClick='' class="btn btn-lg btn-primary evalView">Recommendation 1</button>
+    <button id='viewRec1' onClick='' class="btn btn-lg btn-primary evalView">Recommendation 2</button>
+    <button id='viewRec2' onClick='' class="btn btn-lg btn-primary evalView">Recommendation 3</button>
+    <button id='viewApprove' onClick='' class="btn btn-lg btn-info evalView">Approve</button>
+
+    <BR><BR>
+
+    <div id="eval_content"></div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    var current_page = '#viewEval';
+    var applicant_id = {{ applicant.id }};
+
+    var linktypes = {
+        viewApp: 'app',
+        viewRec0: 'rec',
+        viewRec1: 'rec',
+        viewRec2: 'rec',
+        viewApprove: 'approve'
+    };
+
+    $(function(){
+        $('.evalView').click(function() {
+            $(this).siblings('.evalView').removeClass('btn-info').addClass('btn-primary');
+            $(this).removeClass('btn-primary').addClass('btn-info');
+            $(this).addClass('btn-info');
+
+            var recnum = 0;
+
+            $.post("/approve_click/", { 'applicant_id': applicant_id, 'linktype': linktypes[$(this).attr('id')], 'recnum': $(this).attr('id') }, function(response, success){
+                $("#eval_content").html(response);
+            });
+        });
+
+        // Do this on load
+        $.post("/approve_click/", { 'applicant_id': applicant_id, 'linktype': 'approve' }, function(response, success){
+            $("#eval_content").html(response);
+        });
+    });
+});
+</script>
+{% endblock %}

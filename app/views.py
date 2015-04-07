@@ -11,7 +11,7 @@ from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from app.models import Applicant, Evaluator, Recommender, Staff, Recommendation, Evaluation
-from app.forms import CustomLoginForm, ForgotPasswordForm, ResetPasswordForm, CreateAccountForm, ProfileForm, TechForm, ShortAnswersForm, RecommendersForm, EditRecommenderForm, RecommendationForm, EvaluationForm, AssignEvaluatorForm
+from app.forms import CustomLoginForm, ForgotPasswordForm, ResetPasswordForm, CreateAccountForm, ProfileForm, TechForm, ShortAnswersForm, RecommendersForm, EditRecommenderForm, RecommendationForm, EvaluationForm, AssignEvaluatorForm, ApprovalForm
 from app.emails import application_created, password_sent, application_received, recommendation_requested, recommendation_requested_existing_recommender, recommendation_request_sent, recommendation_received
 from django.core.mail import send_mail
 
@@ -94,6 +94,11 @@ def faq(request):
 
 @login_required
 def index(request):
+    try:
+        if request.user.username in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+            return HttpResponseRedirect(reverse('approve_applicants_index'))
+    except:
+        pass
     try:
         if request.user.applicant:
             return HttpResponseRedirect(reverse('applicant_index'))
@@ -579,7 +584,60 @@ def add_evaluation(request):
     return HttpResponseRedirect(reverse('index'))
 
 
+@login_required
+def approve_applicants_index(request):
+    if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+        return HttpResponseRedirect(reverse('index'))
+    applicants = Applicant.objects.filter(application_submitted = 1)
+    payload = {'applicants': applicants}
 
+    return render(request, 'approve_applicants.html', payload)
+
+@login_required
+def approve(request, applicant_id):
+    if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+        return HttpResponseRedirect(reverse('index'))
+
+    applicant = Applicant.objects.get(id = applicant_id)
+
+    if request.method == 'POST':
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            applicant.is_approved = form.cleaned_data.get('approve')
+            applicant.save()
+            return HttpResponseRedirect(reverse('approve_applicants_index'))
+
+    payload = {'applicant': applicant}
+
+    return render(request, 'approve_base.html', payload)
+
+def approve_click(request):
+    if request.user.username in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+        if request.method == 'POST':
+            data = request.POST
+            applicant = Applicant.objects.get(id = data['applicant_id'])
+
+            if data['linktype'] == 'approve':
+                form = ApprovalForm()
+                form.approve = applicant.is_approved
+                url = 'approve.html'
+                payload = {'applicant': applicant, 'form': form}
+            elif data['linktype'] == 'rec':
+                url = 'eval_rec.html'
+                recommendations = applicant.recommendation_set.all()
+                rec_ids = []
+                for rec in recommendations:
+                    rec_ids.append(rec.id)
+                rec_ids.sort()
+                recnum = int(data['recnum'][-1])
+                recommendation = Recommendation.objects.get(id = rec_ids[recnum]) if not len(rec_ids) - 1 < recnum else None
+                payload = {'recommendation': recommendation}
+            elif data['linktype'] == 'app':
+                url = 'eval_app.html'
+                payload = {'applicant': applicant}
+            return render(request, url, payload)
+    else:
+        return HttpResponseRedirect('index')
 
 # Section V: Views for staff functionality
 # ========================================

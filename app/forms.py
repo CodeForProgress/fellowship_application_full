@@ -225,6 +225,11 @@ class EvaluationForm(Form):
     notes = CharField(required=False, widget=Textarea())
     recommend = ChoiceField(choices=(('0','Select...'),('1', 'No'),('2', 'Yes')), required=True, label="Overall recommendation")
 
+class ApprovalForm(Form):
+    approve = ChoiceField(choices=(('0', 'Nay'),('1', 'Yay')), required=True, label="Wouldst thou approve ye applicant?")
+
+
+
 
 class EditRecommenderForm(Form):
     def __init__(self, *args, **kwargs):

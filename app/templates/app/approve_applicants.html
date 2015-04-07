@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<h1>Your applicant approval dashboard</h1>
+<hr class="form">
+<div>
+<div style="float:left; width:75%">Hi Dirk and Michelle!  Use these links to approve applicants for evaluation.  Woo!</div>
+</p></div>
+<BR><BR><BR>
+<div>
+{% for applicant in applicants %}
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <hr>
+    <h3>{{applicant.user.first_name}} {{applicant.user.last_name}}</h3>
+  </div>
+  <div class="col-sm-3">
+    <hr>
+    <button onClick="location.href='{% url 'approve' applicant.id %}'" class="btn-block btn btn-lg btn-info">
+        Start/Edit
+        {% if applicant.is_approved %} &nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">Approved</span> {% endif %}
+    </button>
+  </div>
+</div>
+{% endfor %}
+</div><br>
+{% endblock %}
