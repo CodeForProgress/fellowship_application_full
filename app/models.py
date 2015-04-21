@@ -274,11 +274,18 @@ class Evaluation(models.Model):
     criteria_3_rating = models.IntegerField(null=True, blank=True)
     criteria_4_rating = models.IntegerField(null=True, blank=True)
     criteria_5_rating = models.IntegerField(null=True, blank=True)
+    criteria_6_rating = models.IntegerField(null=True, blank=True)
+    criteria_7_rating = models.IntegerField(null=True, blank=True)
+    criteria_8_rating = models.IntegerField(null=True, blank=True)
+    criteria_9_rating = models.IntegerField(null=True, blank=True)
+    criteria_10_rating = models.IntegerField(null=True, blank=True)
+    criteria_11_rating = models.IntegerField(null=True, blank=True)
+    criteria_12_rating = models.IntegerField(null=True, blank=True)
     recommend = models.IntegerField(null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
 
     def is_complete(self):
-        if self.criteria_1_rating and self.criteria_2_rating and self.criteria_3_rating and self.criteria_4_rating and self.criteria_5_rating and self.recommend:
+        if self.criteria_1_rating and self.criteria_2_rating and self.criteria_3_rating and self.criteria_4_rating and self.criteria_5_rating and self.criteria_6_rating and self.criteria_7_rating and self.criteria_8_rating and self.criteria_9_rating and self.criteria_10_rating and self.criteria_11_rating and self.criteria_12_rating and self.recommend:
             return True
         return False
 

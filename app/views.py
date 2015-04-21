@@ -534,6 +534,13 @@ def evaluate(request, evaluation_id):#pass in the student this is for
             evaluation.criteria_3_rating = form.cleaned_data.get('criteria_3_rating') if form.cleaned_data.get('criteria_3_rating') else None
             evaluation.criteria_4_rating = form.cleaned_data.get('criteria_4_rating') if form.cleaned_data.get('criteria_4_rating') else None
             evaluation.criteria_5_rating = form.cleaned_data.get('criteria_5_rating') if form.cleaned_data.get('criteria_5_rating') else None
+            evaluation.criteria_6_rating = form.cleaned_data.get('criteria_6_rating') if form.cleaned_data.get('criteria_6_rating') else None
+            evaluation.criteria_7_rating = form.cleaned_data.get('criteria_7_rating') if form.cleaned_data.get('criteria_7_rating') else None
+            evaluation.criteria_8_rating = form.cleaned_data.get('criteria_8_rating') if form.cleaned_data.get('criteria_8_rating') else None
+            evaluation.criteria_9_rating = form.cleaned_data.get('criteria_9_rating') if form.cleaned_data.get('criteria_9_rating') else None
+            evaluation.criteria_10_rating = form.cleaned_data.get('criteria_10_rating') if form.cleaned_data.get('criteria_10_rating') else None
+            evaluation.criteria_11_rating = form.cleaned_data.get('criteria_11_rating') if form.cleaned_data.get('criteria_11_rating') else None
+            evaluation.criteria_12_rating = form.cleaned_data.get('criteria_12_rating') if form.cleaned_data.get('criteria_12_rating') else None
             evaluation.notes = form.cleaned_data.get('notes')
             evaluation.recommend = form.cleaned_data.get('recommend')
             evaluation.save()
@@ -588,7 +595,7 @@ def add_evaluation(request):
 def approve_applicants_index(request):
     if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
         return HttpResponseRedirect(reverse('index'))
-    applicants = Applicant.objects.filter(application_submitted = 1)
+    applicants = Applicant.objects.raw("SELECT * FROM app_applicants WHERE application_submitted = 1 AND id in (SELECT applicant_id FROM app_recommendation WHERE submitted = 1)")
     payload = {'applicants': applicants}
 
     return render(request, 'approve_applicants.html', payload)
