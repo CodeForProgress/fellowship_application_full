@@ -595,7 +595,7 @@ def add_evaluation(request):
 def approve_applicants_index(request):
     if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
         return HttpResponseRedirect(reverse('index'))
-    applicants = Applicant.objects.raw("SELECT * FROM app_applicants WHERE application_submitted = 1 AND id in (SELECT applicant_id FROM app_recommendation WHERE submitted = 1)")
+    applicants = Applicant.objects.raw("SELECT * FROM app_applicant WHERE application_submitted = 1 AND id in (SELECT applicant_id FROM app_recommendation WHERE submitted = 1)")
     payload = {'applicants': applicants}
 
     return render(request, 'approve_applicants.html', payload)
