@@ -6,7 +6,16 @@
 <h1>Your evaluator dashboard</h1>
 <hr class="form">
 <div>
-<div style="float:left; width:75%">Text thanking the evaluator for their time, and brief instructions on how to complete the evaluations.  Woo!</div>
+<div style="float:left; width:75%">Thank you so much for volunteering to evaluate applications for the 2015 Fellowship! We have an amazing group of applicants this year, and we are glad to have your support to honor the time each of them spent answering questions and organizing their evaluators.
+
+Things to remember:
+<ul>
+    <li>You may evaluate an applicant whether or not all of their recommendations have been submitted</li>
+    <li>We will score each application based on your assessment and then select applicants to move to the interview round</li>
+    <li>Applications are randomly assigned to you, so there is no bell curve. If they’re all amazing, rate them as such!</li>
+    <li>If you have any questions, feel free to email us at info@codeforprogress.org</li>
+</ul>
+</div>
 {% if user.evaluator.all_evals_complete %}
         <div style="float:left; margin-left: 10%; width: 15%;"><a href="{% url 'add_evaluation' %}" class="btn btn-success">Add New Evaluation</a></div>
 {% endif %}
