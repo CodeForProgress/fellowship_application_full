@@ -217,11 +217,13 @@ class RecommendationForm(Form):
 
 
 class EvaluationForm(Form):
-    criteria_1_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_2_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_3_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_4_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
-    criteria_5_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False)
+    criteria_1_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False, label='The applicant has a working understanding of social-, racial-, or economic justice.')
+    criteria_2_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False, label='The applicant demonstrates activism or community involvement in racial-, social-, or economic-justice projects.')
+    criteria_3_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False, label='The applicant displays sufficient professionalism to be successful in a professional environment post-Fellowship.')
+    criteria_4_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False, label='The applicant demonstrates values of mentorship and leadership.')
+    criteria_5_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False, label='The applicant shows an appreciation of the value associated with the opportunity.')
+    criteria_6_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False, label='The applicant identifies as a woman or person of color.')
+    criteria_7_rating = ChoiceField(widget=RadioSelect, choices=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5')), required=False, label='The applicant demonstrates an analytical approach to problem solving.')
     notes = CharField(required=False, widget=Textarea())
     recommend = ChoiceField(choices=(('0','Select...'),('1', 'No'),('2', 'Yes')), required=True, label="Overall recommendation")
 
