@@ -95,7 +95,7 @@ def faq(request):
 @login_required
 def index(request):
     try:
-        if request.user.username in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+        if request.user.username in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com', 'naeem@codeforprogress.org']:
             return HttpResponseRedirect(reverse('approve_applicants_index'))
     except:
         pass
@@ -588,7 +588,7 @@ def add_evaluation(request):
 
 @login_required
 def approve_applicants_index(request):
-    if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+    if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com', 'naeem@codeforprogress.org']:
         return HttpResponseRedirect(reverse('index'))
     applicants = Applicant.objects.raw("SELECT * FROM app_applicant WHERE application_submitted = 1 AND id in (SELECT applicant_id FROM app_recommendation WHERE submitted = 1)")
     payload = {'applicants': applicants}
@@ -597,7 +597,7 @@ def approve_applicants_index(request):
 
 @login_required
 def approve(request, applicant_id):
-    if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+    if request.user.username not in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com', 'naeem@codeforprogress.org']:
         return HttpResponseRedirect(reverse('index'))
 
     applicant = Applicant.objects.get(id = applicant_id)
@@ -614,7 +614,7 @@ def approve(request, applicant_id):
     return render(request, 'approve_base.html', payload)
 
 def approve_click(request):
-    if request.user.username in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com']:
+    if request.user.username in ['dirk@codeforprogress.org', 'michelle@codeforprogress.org', 'adamloganunger@gmail.com', 'naeem@codeforprogress.org']:
         if request.method == 'POST':
             data = request.POST
             applicant = Applicant.objects.get(id = data['applicant_id'])
