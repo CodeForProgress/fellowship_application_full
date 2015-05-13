@@ -285,7 +285,7 @@ class Evaluation(models.Model):
     notes = models.TextField(null=True, blank=True)
 
     def is_complete(self):
-        if self.criteria_1_rating and self.criteria_2_rating and self.criteria_3_rating and self.criteria_4_rating and self.criteria_5_rating and self.criteria_6_rating and self.criteria_7_rating and self.criteria_8_rating and self.criteria_9_rating and self.criteria_10_rating and self.criteria_11_rating and self.criteria_12_rating and self.recommend:
+        if self.criteria_1_rating and self.criteria_2_rating and self.criteria_3_rating and self.criteria_4_rating and self.criteria_5_rating and self.criteria_6_rating and self.criteria_7_rating and self.recommend:
             return True
         return False
 
