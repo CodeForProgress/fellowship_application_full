@@ -253,6 +253,8 @@ class Evaluator(models.Model):
                     AND criteria_3_rating IS NOT NULL
                     AND criteria_4_rating IS NOT NULL
                     AND criteria_5_rating IS NOT NULL
+                    AND criteria_6_rating IS NOT NULL
+                    AND criteria_7_rating IS NOT NULL
                     AND recommend IS NOT NULL
                     GROUP BY applicant_id
                     HAVING count(*) >= 3
