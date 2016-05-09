@@ -89,7 +89,7 @@ def reset_password(request):
 
 
 def faq(request):
-    return render(request, 'faq.html')
+    return render(request, 'faq.html', {})
 
 
 @login_required
@@ -119,7 +119,7 @@ def index(request):
             return HttpResponseRedirect(reverse('staff_index_applicants'))
     except:
         pass
-    return render(request, 'app_closed', {})
+    return render(request, 'app_closed.html', {})
 
 
 
