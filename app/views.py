@@ -119,6 +119,7 @@ def index(request):
             return HttpResponseRedirect(reverse('staff_index_applicants'))
     except:
         pass
+    return render(request, 'app_closed', {})
 
 
 
