@@ -151,7 +151,7 @@ def createaccount(request):
             return HttpResponseRedirect(reverse('index'))
     else:
         form = CreateAccountForm()
-    return render(request, 'create_account.html', {'form':form})
+    return render(request, 'app_closed.html', {'form':form})
 
 
 @login_required
