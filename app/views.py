@@ -101,17 +101,17 @@ def index(request):
         pass
     try:
         if request.user.applicant:
-            return HttpResponseRedirect(reverse('applicant_index'))
+            return HttpResponseRedirect(reverse('app_closed.html'))
     except:
         pass
     try:
         if request.user.recommender:
-            return HttpResponseRedirect(reverse('rec_index'))
+            return HttpResponseRedirect(reverse('app_closed.html'))
     except:
         pass
     try:
         if request.user.evaluator:
-            return HttpResponseRedirect(reverse('eval_index'))
+            return HttpResponseRedirect(reverse('app_closed.html'))
     except:
         pass
     try:
